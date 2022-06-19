@@ -38,8 +38,8 @@ for epoch in range(args.epochs):
     model.train()
 
     for X, y in train_loader:
-        X = X.cuda()
-        y = y.cuda()
+        X = X.cuda(args.gpu)
+        y = y.cuda(args.gpu)
 
         optimizer.zero_grad()
         pred = model(X)
@@ -74,8 +74,8 @@ for epoch in range(args.epochs):
         val_losses = []
         
         for X, y in val_loader:
-            X = X.cuda()
-            y = y.cuda()
+            X = X.cuda(args.gpu)
+            y = y.cuda(args.gpu)
 
             pred = model(X)
             loss = criterion(pred, y)
