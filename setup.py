@@ -25,7 +25,9 @@ setup(
     'tqdm',
     'advertorch',
     'pandas',
-    'tensorboardx'
+    'tensorboardx',
+    'tensorboard',
+    'mat73'
   ],
   setup_requires=[
     'pytest-runner',
