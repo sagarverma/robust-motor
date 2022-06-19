@@ -84,65 +84,36 @@ def load_data(root):
 def _load_exp_data(root):
     data = sio.loadmat(root)
 
+    noisy_voltage_d = normalize(data['noisy_voltage_d'], 'voltage_d')
     voltage_d = normalize(data['voltage_d'][0, :], 'voltage_d')
     voltage_q = normalize(data['voltage_q'][0, :], 'voltage_q')
+    noisy_voltage_q = normalize(data['noisy_voltage_q'][0, :], 'voltage_q')
     current_d = normalize(data['current_d'][0, :], 'current_d')
+    noisy_current_d = normalize(data['noisy_current_d'][0, :], 'current_d')
     current_q = normalize(data['current_q'][0, :], 'current_q')
+    noisy_current_q = normalize(data['noisy_current_q'][0, :], 'current_q')
     speed = normalize(data['speed'][0, :], 'speed')
     torque = normalize(data['torque'][0, :], 'torque')
     time = data['time'][0, :]
 
 
-    dataset = (voltage_d, voltage_q, speed,
-               current_d, current_q, torque, time)
+    dataset = (noisy_voltage_d, voltage_d, noisy_voltage_q, voltage_q, speed,
+               noisy_current_d, current_d, noisy_current_q, current_q, torque, time)
     dataset = np.vstack(dataset)
 
-    index_quant_map = {'voltage_d': 0,
-                       'voltage_q': 1,
-                       'speed': 2,
-                       'current_d': 3,
-                       'current_q': 4,
-                       'torque': 5,
-                       'time': 6}
+    index_quant_map = {'noisy_voltage_d': 0, 
+                       'voltage_d': 1,
+                       'noisy_voltage_q': 2,
+                       'voltage_q': 3,
+                       'speed': 4,
+                       'noisy_current_d': 5,
+                       'current_d': 6,
+                       'noisy_current_q': 7,
+                       'current_q': 8,
+                       'torque': 9,
+                       'time': 10}
 
     return dataset.astype(np.float32), index_quant_map
-
-
-def rev_test_output(data):
-    """Denormalize the inference output.
-    Args:
-        dataset (np.asarray): Output from inference.
-    Returns:
-        np.asarray: Denormalized inference output.
-    Raises:        ExceptionName: Why the exception is raised.
-    Examples
-        Examples should be written in doctest format, and
-        should illustrate how to use the function/class.
-        >>>
-    """
-    time = data[0, :]
-    voltage_d = denormalize(data[1, :], 'voltage_d')
-    voltage_q = denormalize(data[2, :], 'voltage_q')
-    speed = denormalize(data[3, :], 'speed')
-    current_d_true = denormalize(data[4, :], 'current_d')
-    current_d_pred = denormalize(data[5, :], 'current_d')
-    current_q_true = denormalize(data[6, :], 'current_q')
-    current_q_pred = denormalize(data[7, :], 'current_q')
-    torque_true = denormalize(data[8, :], 'torque')
-    torque_pred = denormalize(data[9, :], 'torque')
-
-    dataset = {'time': time,
-               'voltage_d': voltage_d,
-               'voltage_q': voltage_q,
-               'speed': speed,
-               'current_d_true': current_d_true,
-               'current_d_pred': current_d_pred,
-               'current_q_true': current_q_true,
-               'current_q_pred': current_q_pred,
-               'torque_true': torque_true,
-               'torque_pred': torque_pred}
-
-    return dataset
 
 
 def get_sample_metadata(dataset, stride=1, window=100):
@@ -300,8 +271,16 @@ def _get_loader(dir, args, shuffle):
     dataset, index_quant_map = load_data(dir)
     samples = get_sample_metadata(dataset, 1, 100)
     preloader_class = _get_prelaoder_class(args)
-    inp_quants = ['voltage_d', 'voltage_q', 'speed']
-    out_quants = ['current_d', 'current_q', 'torque']
+    if args.dataset == 'MotorDynamics':
+        inp_quants = ['voltage_d', 'voltage_q', 'speed']
+        out_quants = ['current_d', 'current_q', 'torque']
+    if args.dataset == 'MotorDenoise':
+        inp_quants = ['noisy_voltage_d', 'noisy_voltage_q', 'noisy_current_d', 'noisy_current_q']
+        out_quants = ['voltage_d', 'voltage_q', 'current_d', 'current_q']
+    if args.dataset == 'SpeedTorque':
+        inp_quants = ['voltage_d', 'voltage_q', 'current_d', 'current_q']
+        out_quants = ['speed', 'torque']
+
     preloader = preloader_class(dataset, index_quant_map, samples,
                                 inp_quants, out_quants)
     dataloader = data.DataLoader(preloader, batch_size=args.batch_size,
@@ -322,10 +301,10 @@ def get_loaders(args):
         >>>
     """
 
-    train_loader, train_samples = _get_loader(args.train_sim_dir, args, True)
-    val_loader, val_samples = _get_loader(args.val_sim_dir, args, False)
+    train_loader, train_samples = _get_loader('data/Data_27012021_noisy/train', args, True)
+    val_loader, val_samples = _get_loader('data/Data_27012021_noisy/val', args, False)
 
-    print('train sim samples : ', train_samples)
-    print('val sim samples : ', val_samples)
+    print('train samples : ', train_samples)
+    print('val samples : ', val_samples)
 
-    return train_sim_loader, val_sim_loader
+    return train_loader, val_loader
