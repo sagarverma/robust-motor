@@ -69,7 +69,7 @@ class MaxPool1dPadSame(nn.Module):
     
 class Swish(nn.Module):
     def forward(self, x):
-        return x * F.sigmoid(x)
+        return x * torch.sigmoid(x)
 
 class BasicBlock(nn.Module):
     """
@@ -181,7 +181,7 @@ class BasicBlock(nn.Module):
         se = self.se_fc1(se)
         se = self.se_activation(se)
         se = self.se_fc2(se)
-        se = F.sigmoid(se) # (n_sample, n_channel)
+        se = torch.sigmoid(se) # (n_sample, n_channel)
         out = torch.einsum('abc,ab->abc', out, se)
         
         # if downsample, also downsample identity

@@ -76,7 +76,7 @@ def load_data(root):
 
     print ('Loading Dataset')
 
-    for exp in tqdm.tqdm(exps):
+    for exp in tqdm.tqdm(exps[:2]):
         data = sio.loadmat(exp)
 
         current_a = normalize(data['current_a'], 'current_a')
