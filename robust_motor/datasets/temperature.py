@@ -71,7 +71,7 @@ def load_data(root):
 
         train_dataset[profile_id] =  normalize_quants(profile_df)
 
-        for i in range(0, profile_df.shape[0], 1):
+        for i in range(0, profile_df.shape[0], 1000):
             if (i + 1000) < profile_df.shape[0]:
                 train_samples.append([profile_id, i, i+1000])
 
