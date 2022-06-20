@@ -1,3 +1,4 @@
+import tqdm
 import numpy as np
 
 import torch 
@@ -39,7 +40,7 @@ for epoch in range(args.epochs):
 
     model.train()
 
-    for X, y in train_loader:
+    for X, y in tqdm.tqdm(train_loader):
         X = X.cuda(args.gpu)
         y = y.cuda(args.gpu)
 
@@ -75,7 +76,7 @@ for epoch in range(args.epochs):
         val_smapes = []
         val_losses = []
         
-        for X, y in val_loader:
+        for X, y in tqdm.tqdm(val_loader):
             X = X.cuda(args.gpu)
             y = y.cuda(args.gpu)
 
