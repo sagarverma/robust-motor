@@ -16,7 +16,7 @@ from robust_motor.models.resnet1d import ResNet1D
 from robust_motor.models.crnn1d import CRNN
 from robust_motor.models.acnn1d import ACNN
 from robust_motor.models.regnet1d import RegNet1D
-from robust_motor.models.transformer1d import Tranformer1D, Transformer1D
+from robust_motor.models.transformer1d import Transformer1D
 from robust_motor.models.fedformer import FedFormer
 
 
