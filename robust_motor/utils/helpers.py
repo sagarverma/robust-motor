@@ -114,7 +114,7 @@ def get_model(args):
     if args.model == 'regnet1d':
         model = RegNet1D(in_channels=inp_channels, n_classes=num_classes)
     if args.model == 'transformer1d':
-        model = Transformer1D(inp_channels=inp_channels, num_classes=num_classes)
+        model = Transformer1D(inp_channels=inp_channels, n_classes=num_classes)
     if args.model == 'fedformer':
         model = FedFormer(enc_in=inp_channels, dec_in=inp_channels, 
                             c_out=out_channels, seq_len=1000, label_len=1000, pred_len=1000)
