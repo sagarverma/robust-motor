@@ -9,6 +9,7 @@ data
 *.pth.tar
 pretrained.zip
 
+weights/Temperature
 *__pycache__
 *.pyc
 
