@@ -61,7 +61,7 @@ def get_model(args):
         inp_channels = 4
         out_channels = 2
     if args.dataset == 'BrokenBars':
-        inp_channels = 12
+        inp_channels = 13
         num_classes = 5
     
     act = 'relu'
@@ -97,8 +97,8 @@ def get_model(args):
     if args.model == 'encdec_diag_birnn_skip':
         model = EncDecDiagBiRNNSkip(inp_channels, out_channels, act)
     if args.model == 'resnet1d':
-        model = ResNet1D(in_channels=inp_channels, num_classes=num_classes,
-                        n_blocks=16)
+        model = ResNet1D(in_channels=inp_channels, n_classes=num_classes,
+                        n_block=16)
 
     print ('Parameters :', sum(p.numel() for p in model.parameters()))
 
