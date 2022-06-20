@@ -27,7 +27,8 @@ setup(
     'pandas',
     'tensorboardx',
     'tensorboard',
-    'mat73'
+    'mat73',
+    'sympy'
   ],
   setup_requires=[
     'pytest-runner',
