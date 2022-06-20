@@ -3,7 +3,7 @@ import torch.nn as nn
 
 
 class CRNN(nn.Module):
-    def __init__(self, in_channels, out_channels=128, n_len_seg=1000, n_classes=5):
+    def __init__(self, in_channels, out_channels=256, n_len_seg=1000, n_classes=5):
         super(CRNN, self).__init__()
         
         self.n_len_seg = n_len_seg
