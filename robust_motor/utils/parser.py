@@ -36,5 +36,6 @@ def get_args():
                         default=8,
                         required=False,
                         help='Number of cpu cores to use')
+
     args = parser.parse_args()
     return args
