@@ -13,6 +13,7 @@ from robust_motor.models.encdec import (ShallowEncDec, DeepEncDec, EncDecSkip,
                           EncDecRNNSkip, EncDecBiRNNSkip,
                           EncDecDiagBiRNNSkip)
 from robust_motor.models.resnet1d import ResNet1D
+from robust_motor.models.fedformer import FedFormer
 
 
 def get_paths(args):
@@ -63,7 +64,10 @@ def get_model(args):
     if args.dataset == 'BrokenBars':
         inp_channels = 13
         num_classes = 5
-    
+    if args.dataset == 'Temperature':
+        inp_channels = 11
+        out_channels = 1
+
     act = 'relu'
 
     if args.model == 'shallow_fnn':
@@ -99,7 +103,10 @@ def get_model(args):
     if args.model == 'resnet1d':
         model = ResNet1D(in_channels=inp_channels, n_classes=num_classes,
                         n_block=16)
-
+    if args.model == 'fedformer':
+        model = FedFormer(enc_in=inp_channels, dec_in=inp_channels, 
+                            c_out=out_channels, seq_len=1000, label_len=1000, pred_len=1000)
+                            
     print ('Parameters :', sum(p.numel() for p in model.parameters()))
 
     return model.cuda(args.gpu)
