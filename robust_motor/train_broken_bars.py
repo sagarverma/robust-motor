@@ -21,6 +21,7 @@ weight_dir, log_dir = get_paths(args)
 writer = SummaryWriter(log_dir)
 
 model = get_model(args)
+print (model)
 train_loader, val_loader = get_loaders(args)
 
 criterion = nn.CrossEntropyLoss()
