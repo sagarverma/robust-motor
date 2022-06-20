@@ -216,4 +216,5 @@ class Decoder(nn.Module):
 
         if self.projection is not None:
             x = self.projection(x)
+        
         return x, trend
