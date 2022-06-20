@@ -16,7 +16,7 @@ class Transformer1D(nn.Module):
         
     """
 
-    def __init__(self, inp_channels, n_classes=5, n_length=1000, d_model=2, nhead=2, dim_feedforward=128, dropout=0.1):
+    def __init__(self, inp_channels, n_classes=5, n_length=1000, d_model=16, nhead=8, dim_feedforward=128, dropout=0.1):
         super(Transformer1D, self).__init__()
 
         self.d_model = d_model
