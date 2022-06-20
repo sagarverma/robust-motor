@@ -24,7 +24,7 @@ writer = SummaryWriter(log_dir)
 model = get_model(args)
 train_loader, val_loader = get_loaders(args)
 
-criterion = nn.CrossEntropyLoss()
+criterion = nn.MSELoss()
 optimizer = optim.Adam(model.parameters())
 scheduler = ReduceLROnPlateau(optimizer, mode='max', patience=5, verbose=True)
 
