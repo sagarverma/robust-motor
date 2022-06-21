@@ -98,7 +98,7 @@ class TemperatureLoader(data.Dataset):
 
         inp_seq = self.full_load[name][:-1, start:end]
         out_seq = self.full_load[name][-2:-1, start:end]
-        return inp_seq.transpose(1, 0), out_seq.transpose(1, 0)
+        return inp_seq, out_seq
 
     def __len__(self):
         return len(self.samples)
