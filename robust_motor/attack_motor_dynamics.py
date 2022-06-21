@@ -37,8 +37,8 @@ model.load_state_dict(weight)
 _, val_loader = get_loaders(args)
 
 
-fgm_attack = GradientSignAttack(model, loss_fn=nn.MSELoss(), eps=0.1)
-pgd_attack = L2PGDAttack(model, loss_fn=nn.MSELoss(), eps=0.1, eps_iter=0.1/3, nb_iter=20)
+fgm_attack = GradientSignAttack(model, loss_fn=nn.MSELoss(), eps=0.01)
+pgd_attack = L2PGDAttack(model, loss_fn=nn.MSELoss(), eps=0.01, eps_iter=0.01/4, nb_iter=20)
 
 fgm_smape = []
 fgm_r2 = []
@@ -106,13 +106,13 @@ clean_r2 = np.mean(clean_r2)
 clean_rmse = np.mean(clean_rmse)
 clean_smape = np.mean(clean_smape)
 
-print (f'Clean Acc: R2 {clean_r2}, SMAPE {clean_smape}, RMSE {clean_rmse}, MAE {clean_mae}')
-print (f'PGD: R2 {pgd_r2}, SMAPE {pgd_smape}, RMSE {pgd_rmse}, MAE {pgd_mae}')
-print (f'Fast Gradient Method: R2 {fgm_r2}, SMAPE {fgm_smape}, RMSE {fgm_rmse}, MAE {fgm_mae}')
+print (f'Clean  &  {clean_mae:.2f}  &  {clean_smape:.2f}  &  {clean_r2:.2f} & {clean_rmse:.2f}')
+print (f'PGD    &  {pgd_mae:.2f}  &  {pgd_smape:.2f} & {pgd_r2:.2f} & {pgd_rmse:.2f}')
+print (f'FGSM    &  {fgm_mae:.2f} &  {fgm_smape:.2f} & {fgm_r2:.2f} & {fgm_rmse:.2f}')
 
 
 fout = open(args.weight_path.replace('.pt', '_attack.txt'), 'w')
-fout.write(f'Clean Acc: R2 {clean_r2}, SMAPE {clean_smape}, RMSE {clean_rmse}, MAE {clean_mae}\n')
-fout.write(f'PGD: R2 {pgd_r2}, SMAPE {pgd_smape}, RMSE {pgd_rmse}, MAE {pgd_mae}\n')
-fout.write(f'Fast Gradient Method: R2 {fgm_r2}, SMAPE {fgm_smape}, RMSE {fgm_rmse}, MAE {fgm_mae}\n')
+fout.write(f'Clean & {clean_mae:.2f} &  {clean_smape:.2f} & {clean_r2:.2f} & {clean_rmse:.2f}\n')
+fout.write(f'PGD & {pgd_mae:.2f} &  {pgd_smape:.2f} & {pgd_r2:.2f} & {pgd_rmse:.2f}\n')
+fout.write(f'FGSM & {fgm_mae:.2f} &  {fgm_smape:.2f} & {fgm_r2:.2f} & {fgm_rmse:.2f}\n')
 fout.close()

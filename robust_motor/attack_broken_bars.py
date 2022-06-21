@@ -33,7 +33,7 @@ args.dataset = dataset_name
 model = get_model(args)
 weight = torch.load(args.weight_path, map_location=torch.device(args.gpu))
 model.load_state_dict(weight)
-# model.eval()
+model.eval()
 
 fmodel = fb.PyTorchModel(model, bounds=(0, 1))
 
@@ -70,10 +70,10 @@ fgm_acc = np.mean(fgm_accs)
 df_acc = np.mean(df_accs)
 clean_acc = np.mean(clean_accs)
 
-print (f'FastGRadientMethod: {fgm_acc}, Deep Fool: {df_acc}, Clean Acc: {clean_acc}')
+print (f'FastGRadientMethod: {fgm_acc:.2f}, Deep Fool: {df_acc:.2f}, Clean Acc: {clean_acc:.2f}')
 
 fout = open(args.weight_path.replace('.pt', '_attack.txt'), 'w')
-fout.write(f'Clean Accuracy: {clean_acc}\n')
-fout.write(f'FGM Accuracy: {fgm_acc}\n')
-fout.write(f'DeepFool Accuracy: {df_acc}\n')
+fout.write(f'Clean Accuracy: {clean_acc:.2f}\n')
+fout.write(f'FGM Accuracy: {fgm_acc:.2f}\n')
+fout.write(f'DeepFool Accuracy: {df_acc:.2f}\n')
 fout.close()
