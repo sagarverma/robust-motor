@@ -89,6 +89,6 @@ for epoch in range(args.epochs):
         log(writer, epoch, 'val', np.mean(val_losses),
             {'ACC': np.mean(val_accs), 'F1': np.mean(val_f1s)})
 
-    if np.mean(val_f1s) < best_f1:
+    if np.mean(val_f1s) > best_f1:
         best_f1 = np.mean(val_f1s)
         torch.save( model.state_dict(), f"{weight_dir}/checkpoint-{str(epoch).zfill(3)}.pt")
