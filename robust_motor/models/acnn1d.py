@@ -31,19 +31,19 @@ class ACNN(nn.Module):
                             kernel_size=16, 
                             stride=4)
         self.cnn2 = nn.Conv1d(in_channels=self.out_channels, 
-                            out_channels=self.out_channels * 2, 
+                            out_channels=self.out_channels, 
                             kernel_size=8, 
                             stride=2)
-        self.cnn3 = nn.Conv1d(in_channels=self.out_channels * 2, 
-                            out_channels=self.out_channels * 4, 
+        self.cnn3 = nn.Conv1d(in_channels=self.out_channels, 
+                            out_channels=self.out_channels, 
                             kernel_size=4, 
                             stride=1)
 
         self.W_att_channel = nn.Parameter(torch.randn(self.out_channels, self.att_channels))
         self.v_att_channel = nn.Parameter(torch.randn(self.att_channels, 1))
 
-        self.dense1 = nn.Linear(out_channels * 4, self.out_channels * 2)
-        self.dense2 = nn.Linear(out_channels * 2, self.n_classes)
+        self.dense1 = nn.Linear(out_channels, self.out_channels)
+        self.dense2 = nn.Linear(out_channels, self.n_classes)
         
     def forward(self, x):
 
