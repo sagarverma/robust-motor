@@ -26,15 +26,24 @@ class ACNN(nn.Module):
         self.out_channels = out_channels
         self.att_channels = att_channels
 
-        self.cnn = nn.Conv1d(in_channels=self.in_channels, 
+        self.cnn1 = nn.Conv1d(in_channels=self.in_channels, 
                             out_channels=self.out_channels, 
                             kernel_size=16, 
                             stride=4)
+        self.cnn2 = nn.Conv1d(in_channels=self.out_channels, 
+                            out_channels=self.out_channels * 2, 
+                            kernel_size=8, 
+                            stride=2)
+        self.cnn3 = nn.Conv1d(in_channels=self.out_channels * 2, 
+                            out_channels=self.out_channels * 4, 
+                            kernel_size=4, 
+                            stride=1)
 
         self.W_att_channel = nn.Parameter(torch.randn(self.out_channels, self.att_channels))
         self.v_att_channel = nn.Parameter(torch.randn(self.att_channels, 1))
 
-        self.dense = nn.Linear(out_channels, n_classes)
+        self.dense1 = nn.Linear(out_channels * 4, self.out_channels * 2)
+        self.dense2 = nn.Linear(out_channels * 2, self.n_classes)
         
     def forward(self, x):
 
@@ -46,7 +55,9 @@ class ACNN(nn.Module):
         out = out.permute(0,2,1)
         out = out.view(-1, self.n_len_seg, self.n_channel)
         out = out.permute(0,2,1)
-        out = self.cnn(out)
+        out = self.cnn1(out)
+        out = self.cnn2(out)
+        out = self.cnn3(out)
         out = out.mean(-1)
         out = out.view(-1, self.n_seg, self.out_channels)
         e = torch.matmul(out, self.W_att_channel)
@@ -55,5 +66,6 @@ class ACNN(nn.Module):
         n2 = torch.sum(torch.exp(e), 1, keepdim=True)
         gama = torch.div(n1, n2)
         out = torch.sum(torch.mul(gama, out), 1)
-        out = self.dense(out)
+        out = self.dense1(out)
+        out = self.dense2(out)
         return out
