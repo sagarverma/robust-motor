@@ -19,7 +19,7 @@ class CRNN(nn.Module):
         # (batch, seq, feature)
         self.rnn = nn.LSTM(input_size=(self.out_channels), 
                             hidden_size=self.out_channels, 
-                            num_layers=1, 
+                            num_layers=2, 
                             batch_first=True, 
                             bidirectional=False)
         self.dense = nn.Linear(out_channels, n_classes)
