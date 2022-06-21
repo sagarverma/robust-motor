@@ -44,6 +44,8 @@ class ACNN(nn.Module):
 
         self.dense1 = nn.Linear(out_channels, self.out_channels)
         self.dense2 = nn.Linear(out_channels, self.n_classes)
+
+        self.dropout = nn.Dropout(p=0.1)
         
     def forward(self, x):
 
@@ -55,8 +57,8 @@ class ACNN(nn.Module):
         out = out.permute(0,2,1)
         out = out.view(-1, self.n_len_seg, self.n_channel)
         out = out.permute(0,2,1)
-        out = self.cnn1(out)
-        out = self.cnn2(out)
+        out = self.dropout(self.cnn1(out))
+        out = self.dropout(self.cnn2(out))
         out = self.cnn3(out)
         out = out.mean(-1)
         out = out.view(-1, self.n_seg, self.out_channels)
@@ -66,6 +68,6 @@ class ACNN(nn.Module):
         n2 = torch.sum(torch.exp(e), 1, keepdim=True)
         gama = torch.div(n1, n2)
         out = torch.sum(torch.mul(gama, out), 1)
-        out = self.dense1(out)
+        out = self.dropout(self.dense1(out))
         out = self.dense2(out)
         return out
