@@ -5,7 +5,7 @@
 *.pdf
 # logs
 data
-# weights
+weights
 *.pth.tar
 pretrained.zip
 
