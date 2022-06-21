@@ -87,9 +87,9 @@ for X, y in tqdm.tqdm(val_loader):
     pgd_rmse.append(rmse(y, pgd_pred))
     pgd_mae.append(mae(y, pgd_pred))
     
-    # i += 1
-    # if i == 20:
-    #     break
+    i += 1
+    if i == 100:
+        break
 
 fgm_mae = np.mean(fgm_mae)
 fgm_r2 = np.mean(fgm_r2)
