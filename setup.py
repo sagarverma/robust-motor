@@ -28,7 +28,8 @@ setup(
     'tensorboardx',
     'tensorboard',
     'mat73',
-    'sympy'
+    'sympy',
+     'adversarial-robustness-toolbox'
   ],
   setup_requires=[
     'pytest-runner',

@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn 
 
 from robust_motor.utils.helpers import get_model
-from robust_motor.datasets.motor_dynamics import get_loaders
+from robust_motor.datasets.temperature import get_loaders
 
 
 parser = ag.ArgumentParser(description='Attack params')
@@ -17,6 +17,7 @@ parser.add_argument('--eps', type=float, default=0.1)
 parser.add_argument('--batch_size', type=int, default=128)
 parser.add_argument('--num_workers', type=int, default=8)
 parser.add_argument('--gpu', type=int, default=0)
+parser.add_argument('--attack', action='store_true')
 
 args = parser.parse_args()
     
@@ -29,7 +30,7 @@ args.dataset = dataset_name
 _, val_loader = get_loaders(args)
 
 model = get_model(args)
-weight = torch.load(args.weight_path)
+weight = torch.load(args.weight_path, map_location=args.gpu)
 model.load_state_dict(weight)
 model.eval()
 

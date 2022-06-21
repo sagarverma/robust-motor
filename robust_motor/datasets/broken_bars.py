@@ -64,59 +64,62 @@ def denormalize(data, quantity):
     t = a + (data - (0)) * ((b-a) / (1-(0)))
     return t.astype(np.float32)
 
-def load_data(root):
+def load_mat(exp, torque):
+    data = sio.loadmat(exp)
+
+    current_a = normalize(data['current_a'], 'current_a')
+    current_b = normalize(data['current_b'], 'current_b')
+    current_c = normalize(data['current_c'], 'current_c')
+    voltage_a = normalize(data['voltage_a'], 'voltage_a')
+    voltage_b = normalize(data['voltage_b'], 'voltage_b')
+    voltage_c = normalize(data['voltage_c'], 'voltage_c')
+    trigger = normalize(data['trigger'], 'trigger')
+    vib_acpe = normalize(data['vib_acpe'], 'vib_acpe')
+    vib_acpi = normalize(data['vib_acpi'], 'vib_acpi')
+    vib_axial = normalize(data['vib_axial'], 'vib_axial')
+    vib_base = normalize(data['vib_base'], 'vib_base')
+    vib_carc = normalize(data['vib_carc'], 'vib_carc')
+
+    torque = np.ones(vib_carc.shape) * torque
+    torque = normalize(torque, 'torque')
+
+    
+    return  np.stack([current_a[0], current_b[0], current_c[0],
+                                voltage_a[0], voltage_b[0], voltage_c[0],
+                                trigger[0], vib_acpe[0], vib_acpi[0],
+                                vib_axial[0], vib_base[0], vib_carc[0],
+                                torque[0]], axis=0)
+def load_data(root, attack):
     exps = glob.glob(f"{root}/*.mat")
-    cls_map = {'r1b': 1, 'r2b': 2, 'r3b': 3, 'r4b': 4, 'rs': 0}
     torque_map = {"torque05": 0.5, "torque10": 1.0, "torque15": 1.5, 
                   "torque20": 2.0, "torque25": 2.5, "torque30": 3.0,
                   "torque35": 3.5, "torque40": 4.0}
-    dataset = {}
+    cls_map = {'r1b': 1, 'r2b': 2, 'r3b': 3, 'r4b': 4, 'rs': 0}
+
+    train_dataset = {}
+    val_dataset = {}
     train_samples = []
     val_samples = []
 
     print ('Loading Dataset')
 
     for exp in tqdm.tqdm(exps):
-        data = sio.loadmat(exp)
-
-        current_a = normalize(data['current_a'], 'current_a')
-        current_b = normalize(data['current_b'], 'current_b')
-        current_c = normalize(data['current_c'], 'current_c')
-        voltage_a = normalize(data['voltage_a'], 'voltage_a')
-        voltage_b = normalize(data['voltage_b'], 'voltage_b')
-        voltage_c = normalize(data['voltage_c'], 'voltage_c')
-        trigger = normalize(data['trigger'], 'trigger')
-        vib_acpe = normalize(data['vib_acpe'], 'vib_acpe')
-        vib_acpi = normalize(data['vib_acpi'], 'vib_acpi')
-        vib_axial = normalize(data['vib_axial'], 'vib_axial')
-        vib_base = normalize(data['vib_base'], 'vib_base')
-        vib_carc = normalize(data['vib_carc'], 'vib_carc')
-
         name = exp.split('/')[-1].split('.')[0]
         cls, torque, exp_no = name.split('_')
-        
-        torque = np.ones(vib_carc.shape) * torque_map[torque]
-        torque = normalize(torque, 'torque')
 
         lbl = cls_map[cls]
+        if int(exp_no) < 7 and not attack:
+            train_dataset[name] = load_mat(exp, torque_map[torque])
+            for i in range(0, train_dataset[name].shape[1], 1000):
+                if (i + 1000) < train_dataset[name].shape[1]:
+                    train_samples.append([name, i, i+1000, lbl])
+        if int(exp_no) >= 7:
+            val_dataset[name] = load_mat(exp, torque_map[torque])
+            for i in range(0, val_dataset[name].shape[1], 1000):
+                if (i + 1000) < val_dataset[name].shape[1]:
+                    val_samples.append([name, i, i+1000, lbl])
 
-        dataset[name] =  np.stack([current_a[0], current_b[0], current_c[0],
-                                    voltage_a[0], voltage_b[0], voltage_c[0],
-                                    trigger[0], vib_acpe[0], vib_acpi[0],
-                                    vib_axial[0], vib_base[0], vib_carc[0],
-                                    torque[0]], axis=0)
-
-        samples = []
-        for i in range(0, current_a.shape[1], 1000):
-            if (i + 1000) < current_a.shape[1]:
-                samples.append([name, i, i+1000, lbl])
-
-        if int(exp_no) < 7:
-            train_samples += samples
-        else:
-            val_samples += samples
-
-    return dataset, train_samples, val_samples
+    return train_dataset, val_dataset, train_samples, val_samples
 
 
 class BrokernBarsLoader(data.Dataset):
@@ -137,16 +140,18 @@ class BrokernBarsLoader(data.Dataset):
 
 
 def get_loaders(args):
-    dataset, train_samples, val_samples = load_data('data/BrokenBars/')
+    train_dataset, val_dataset, train_samples, val_samples = load_data('data/BrokenBars/', args.attack)
 
     print('train samples : ', len(train_samples))
     print('val samples : ', len(val_samples))
 
-    train_preloader = BrokernBarsLoader(dataset, train_samples)
-    val_preloader = BrokernBarsLoader(dataset, val_samples)
-
-    train_loader = data.DataLoader(train_preloader, batch_size=args.batch_size,
+    train_loader = None
+    if not args.attack:
+        train_preloader = BrokernBarsLoader(train_dataset, train_samples)
+        train_loader = data.DataLoader(train_preloader, batch_size=args.batch_size,
                                     shuffle=True, num_workers=args.num_workers)
+
+    val_preloader = BrokernBarsLoader(val_dataset, val_samples)
     val_loader = data.DataLoader(val_preloader, batch_size=args.batch_size,
                                  shuffle=False, num_workers=args.num_workers)
 

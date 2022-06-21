@@ -36,6 +36,7 @@ def get_args():
                         default=8,
                         required=False,
                         help='Number of cpu cores to use')
+    parser.add_argument('--attack', action='store_true')
 
     args = parser.parse_args()
     return args
