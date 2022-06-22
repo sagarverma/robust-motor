@@ -1,4 +1,5 @@
 import tqdm
+import glob
 import argparse as ag
 import tqdm
 
@@ -22,6 +23,11 @@ parser.add_argument('--gpu', type=int, default=0)
 parser.add_argument('--attack', action='store_true')
 
 args = parser.parse_args()
+
+wps = glob.glob(args.weight_path + '*.pt')
+wps.sort()
+
+args.weight_path = wps[-1]
     
 dataset_name = args.weight_path.split('/')[-3]
 model_name = args.weight_path.split('/')[-2]

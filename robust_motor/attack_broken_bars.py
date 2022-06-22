@@ -33,7 +33,7 @@ args.dataset = dataset_name
 model = get_model(args)
 weight = torch.load(args.weight_path, map_location=torch.device(args.gpu))
 model.load_state_dict(weight)
-model.eval()
+# model.eval()
 
 fmodel = fb.PyTorchModel(model, bounds=(0, 1))
 
@@ -56,8 +56,8 @@ for X, y in tqdm.tqdm(val_loader):
     pred = pred.argmax(axis=1)
     clean_accs.append(accuracy_score(y.cpu().numpy(), pred))
     
-    raw, clipped, is_adv_fgm = fgm_attack(fmodel, X, y, epsilons=0.1)
-    raw, clipped, is_adv_df = df_attack(fmodel, X, y, epsilons=0.1)
+    raw, clipped, is_adv_fgm = fgm_attack(fmodel, X, y, epsilons=0.01)
+    raw, clipped, is_adv_df = df_attack(fmodel, X, y, epsilons=0.01)
 
     fgm_accs.append((1 - is_adv_fgm.float()).mean().item())
     df_accs.append((1 - is_adv_df.float()).mean().item())

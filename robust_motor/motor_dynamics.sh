@@ -1,0 +1,29 @@
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDynamics/shallow_fnn/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDynamics/deep_cnn/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDynamics/deep_rnn/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDynamics/deep_lstm/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDynamics/deep_encdec/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDynamics/encdec_skip/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDynamics/encdec_rnn_skip/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDynamics/encdec_birnn_skip/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDynamics/encdec_diag_birnn_skip/ --batch_size=256 --num_workers=8 --attack
+
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDenoise/shallow_fnn/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDenoise/deep_cnn/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDenoise/deep_rnn/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDenoise/deep_lstm/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDenoise/deep_encdec/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDenoise/encdec_skip/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDenoise/encdec_rnn_skip/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDenoise/encdec_birnn_skip/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/MotorDenoise/encdec_diag_birnn_skip/ --batch_size=256 --num_workers=8 --attack
+
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/SpeedTorque/shallow_fnn/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/SpeedTorque/deep_cnn/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/SpeedTorque/deep_rnn/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/SpeedTorque/deep_lstm/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/SpeedTorque/deep_encdec/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/SpeedTorque/encdec_skip/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/SpeedTorque/encdec_rnn_skip/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/SpeedTorque/encdec_birnn_skip/ --batch_size=256 --num_workers=8 --attack
+python robust_motor/attack_motor_dynamics.py --weight_path=weights/SpeedTorque/encdec_diag_birnn_skip/ --batch_size=256 --num_workers=8 --attack
