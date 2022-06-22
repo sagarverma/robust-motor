@@ -1,0 +1,378 @@
+Parameters : 965123
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDynamics shallow_fnn
+Clean  &  0.03  &  6.24  &  0.71 & 0.06
+FGSM    &  0.12 &  24.06 & -1.57 & 0.17
+
+
+
+
+Parameters : 650307
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDynamics deep_cnn
+Clean  &  0.02  &  4.85  &  0.75 & 0.05
+FGSM    &  0.11 &  22.02 & -1.05 & 0.15
+
+
+
+
+Parameters : 12515
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDynamics deep_rnn
+Clean  &  0.03  &  6.34  &  0.74 & 0.06
+FGSM    &  0.11 &  21.91 & -0.77 & 0.14
+
+
+
+
+Parameters : 22403
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDynamics deep_lstm
+Clean  &  0.02  &  4.93  &  0.76 & 0.05
+FGSM    &  0.12 &  24.73 & -1.90 & 0.18
+
+
+
+
+Parameters : 1097027
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDynamics deep_encdec
+Clean  &  0.03  &  5.14  &  0.73 & 0.06
+FGSM    &  0.11 &  22.89 & -1.02 & 0.15
+
+
+
+
+Parameters : 366083
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDynamics encdec_skip
+Clean  &  0.02  &  4.72  &  0.76 & 0.05
+FGSM    &  0.11 &  24.94 & -1.14 & 0.16
+
+
+
+
+Parameters : 639427
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDynamics encdec_rnn_skip
+Clean  &  0.03  &  6.69  &  0.73 & 0.06
+FGSM    &  0.09 &  20.36 & -0.54 & 0.13
+
+
+
+
+Parameters : 969027
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDynamics encdec_birnn_skip
+Clean  &  0.03  &  6.77  &  0.72 & 0.06
+FGSM    &  0.13 &  26.09 & -1.85 & 0.18
+
+
+
+
+Parameters : 620387
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDynamics encdec_diag_birnn_skip
+Clean  &  0.02  &  4.74  &  0.76 & 0.05
+FGSM    &  0.10 &  21.31 & -0.83 & 0.15
+
+
+
+
+Parameters : 1067780
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDenoise shallow_fnn
+Clean  &  0.01  &  1.16  &  1.00 & 0.01
+FGSM    &  0.01 &  2.52 & 0.99 & 0.02
+
+
+
+
+Parameters : 651076
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDenoise deep_cnn
+Clean  &  0.00  &  0.11  &  1.00 & 0.00
+FGSM    &  0.01 &  1.86 & 0.99 & 0.01
+
+
+
+
+Parameters : 12804
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDenoise deep_rnn
+Clean  &  0.00  &  0.28  &  1.00 & 0.00
+FGSM    &  0.01 &  1.61 & 1.00 & 0.01
+
+
+
+
+Parameters : 22788
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDenoise deep_lstm
+Clean  &  0.00  &  0.26  &  1.00 & 0.00
+FGSM    &  0.01 &  1.71 & 1.00 & 0.01
+
+
+
+
+Parameters : 1097668
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDenoise deep_encdec
+Clean  &  0.00  &  0.22  &  1.00 & 0.00
+FGSM    &  0.01 &  1.63 & 0.99 & 0.01
+
+
+
+
+Parameters : 367044
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDenoise encdec_skip
+Clean  &  0.00  &  0.17  &  1.00 & 0.00
+FGSM    &  0.01 &  1.59 & 1.00 & 0.01
+
+
+
+
+Parameters : 640388
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDenoise encdec_rnn_skip
+Clean  &  0.00  &  0.14  &  1.00 & 0.00
+FGSM    &  0.01 &  1.76 & 1.00 & 0.01
+
+
+
+
+Parameters : 970308
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDenoise encdec_birnn_skip
+Clean  &  0.00  &  0.15  &  1.00 & 0.00
+FGSM    &  0.01 &  1.59 & 1.00 & 0.01
+
+
+
+
+Parameters : 621668
+train samples :  697820
+val samples :  713782
+
+
+
+
+MotorDenoise encdec_diag_birnn_skip
+Clean  &  0.00  &  0.18  &  1.00 & 0.00
+FGSM    &  0.01 &  1.53 & 1.00 & 0.01
+
+
+
+
+Parameters : 1067266
+train samples :  697820
+val samples :  713782
+
+
+
+
+SpeedTorque shallow_fnn
+Clean  &  0.00  &  0.74  &  1.00 & 0.01
+FGSM    &  0.02 &  3.46 & 0.95 & 0.02
+
+
+
+
+Parameters : 650818
+train samples :  697820
+val samples :  713782
+
+
+
+
+SpeedTorque deep_cnn
+Clean  &  0.00  &  0.17  &  1.00 & 0.00
+FGSM    &  0.02 &  3.67 & 0.94 & 0.02
+
+
+
+
+Parameters : 12290
+train samples :  697820
+val samples :  713782
+
+
+
+
+SpeedTorque deep_rnn
+Clean  &  0.00  &  0.25  &  1.00 & 0.00
+FGSM    &  0.01 &  2.67 & 0.97 & 0.02
+
+
+
+
+Parameters : 22274
+train samples :  697820
+val samples :  713782
+
+
+
+
+SpeedTorque deep_lstm
+Clean  &  0.00  &  0.22  &  1.00 & 0.00
+FGSM    &  0.01 &  2.55 & 0.97 & 0.02
+
+
+
+
+Parameters : 1097026
+train samples :  697820
+val samples :  713782
+
+
+
+
+SpeedTorque deep_encdec
+Clean  &  0.00  &  0.30  &  1.00 & 0.00
+FGSM    &  0.01 &  2.94 & 0.96 & 0.02
+
+
+
+
+Parameters : 365762
+train samples :  697820
+val samples :  713782
+
+
+
+
+SpeedTorque encdec_skip
+Clean  &  0.00  &  0.18  &  1.00 & 0.00
+FGSM    &  0.01 &  2.83 & 0.97 & 0.02
+
+
+
+
+Parameters : 639106
+train samples :  697820
+val samples :  713782
+
+
+
+
+SpeedTorque encdec_rnn_skip
+Clean  &  0.00  &  0.82  &  1.00 & 0.01
+FGSM    &  0.01 &  3.13 & 0.96 & 0.02
+
+
+
+
+Parameters : 968386
+train samples :  697820
+val samples :  713782
+
+
+
+
+SpeedTorque encdec_birnn_skip
+Clean  &  0.00  &  0.68  &  1.00 & 0.00
+FGSM    &  0.01 &  2.91 & 0.97 & 0.02
+
+
+
+
+Parameters : 619746
+train samples :  697820
+val samples :  713782
+
+
+
+
+SpeedTorque encdec_diag_birnn_skip
+Clean  &  0.00  &  0.26  &  1.00 & 0.00
+FGSM    &  0.01 &  2.70 & 0.97 & 0.02
+
+
+
+
