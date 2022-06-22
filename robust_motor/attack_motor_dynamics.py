@@ -38,7 +38,7 @@ args.dataset = dataset_name
 model = get_model(args)
 weight = torch.load(args.weight_path, map_location=torch.device(args.gpu))
 model.load_state_dict(weight)
-model.eval()
+# model.eval()
 
 _, val_loader = get_loaders(args)
 
