@@ -112,10 +112,12 @@ clean_r2 = np.mean(clean_r2)
 clean_rmse = np.mean(clean_rmse)
 clean_smape = np.mean(clean_smape)
 
+print ("\n\n\n")
+print (dataset_name, model_name)
 print (f'Clean  &  {clean_mae:.2f}  &  {clean_smape:.2f}  &  {clean_r2:.2f} & {clean_rmse:.2f}')
 print (f'PGD    &  {pgd_mae:.2f}  &  {pgd_smape:.2f} & {pgd_r2:.2f} & {pgd_rmse:.2f}')
 print (f'FGSM    &  {fgm_mae:.2f} &  {fgm_smape:.2f} & {fgm_r2:.2f} & {fgm_rmse:.2f}')
-
+print ("\n\n\n")
 
 fout = open(args.weight_path.replace('.pt', '_attack.txt'), 'w')
 fout.write(f'Clean & {clean_mae:.2f} &  {clean_smape:.2f} & {clean_r2:.2f} & {clean_rmse:.2f}\n')
