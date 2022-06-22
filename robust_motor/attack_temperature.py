@@ -37,8 +37,8 @@ model.load_state_dict(weight)
 _, val_loader = get_loaders(args)
 
 
-fgm_attack = GradientSignAttack(model, loss_fn=nn.MSELoss(), eps=0.1)
-pgd_attack = L2PGDAttack(model, loss_fn=nn.MSELoss(), eps=0.1, eps_iter=0.1/3, nb_iter=20)
+fgm_attack = GradientSignAttack(model, loss_fn=nn.MSELoss(), eps=0.01)
+pgd_attack = L2PGDAttack(model, loss_fn=nn.MSELoss(), eps=0.01, eps_iter=0.01/3, nb_iter=20)
 
 fgm_smape = []
 fgm_r2 = []
