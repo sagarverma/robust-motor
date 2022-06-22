@@ -76,7 +76,7 @@ for X, y in tqdm.tqdm(val_loader):
     y = y.cpu().numpy()
     clean_pred = clean_pred.data.cpu().numpy()
     fgm_pred = fgm_pred.data.cpu().numpy()
-    pgd_pred = pgd_pred.data.cpu().numpy()
+    # pgd_pred = pgd_pred.data.cpu().numpy()
 
     clean_smape.append(smape(y, clean_pred))
     clean_r2.append(r2(y, clean_pred))
