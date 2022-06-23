@@ -1,5 +1,5 @@
 .DS_Store
-.eggs
+.eggs/
 .ipynb_checkpoints
 *.png
 *.jpg
