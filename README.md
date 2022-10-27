@@ -1,6 +1,6 @@
 # Robust Motors
 
-This repository contains code for paper "Robustness of Neural Networks used in Electrical Motor Tasks" submitted in [ECML Workshop on Trustworthy Artificial Intelligence](https://trustworthy-ai-22.sciencesconf.org/). 
+This repository contains code for paper "Robustness of Neural Networks used in Electrical Motor Time-Series" [NeurIPS RobustSeq Workshop 2022](https://robustseq2022.github.io/). 
 
 
 # Datasets
