@@ -5,7 +5,7 @@ setup(
   packages = find_packages(exclude=['examples']),
   version = '0.1.0',
   license='MIT',
-  description = 'Lipschitz certification of robot learning methods - Pytorch',
+  description = 'Adversarial robustness of neural networks used in electrical motor tasks- Pytorch',
   author = 'Sagar Verma and Kavya Gupta',
   author_email = 'sagar15056@iiitd.ac.in',
   url = 'https://github.com/sagarverma/robust-motor',
